@@ -10,7 +10,7 @@ Bureaucrat::Bureaucrat( const std::string name, int grade ) : _name( name ), _gr
 	std::cout << "Bureaucrat Custom Constructor called" << std::endl;
 }
 
-Bureaucrat::Bureaucrat( const Bureaucrat& object ) : _name( object.getName() ), _grade( object.getGrade() )
+Bureaucrat::Bureaucrat( const Bureaucrat &object ) : _name( object.getName() ), _grade( object.getGrade() )
 {
 	*this = object;
 	std::cout << "Bureaucrat Copy Constructor called" << std::endl;
@@ -21,17 +21,24 @@ Bureaucrat::~Bureaucrat()
 	std::cout << "Bureaucrat Default Destructor called" << std::endl;
 }
 
-Bureaucrat& Bureaucrat::operator=( const Bureaucrat& object )
+Bureaucrat &Bureaucrat::operator=( const Bureaucrat &object )
 {
 	(void) object;
 	return *this;
 }
 
-ostream& operator<<( ostream& out, const Bureaucrat& object )
+Bureaucrat	Bureaucrat::operator++( void )
 {
-	out << getName() << ", bureaucrat grade " << getGrade() << std::endl;
-	return out;
+	setGrade( getGrade() + 1 );
+	return *this;
 }
+
+Bureaucrat	Bureaucrat::operator--( void )
+{
+	setGrade( getGrade() - 1 );
+	return *this;
+}
+
 
 void		Bureaucrat::setGrade( int i )
 {
@@ -46,4 +53,10 @@ std::string	Bureaucrat::getName ( void ) const
 int			Bureaucrat::getGrade ( void ) const
 {
 	return _grade;
+}
+
+std::ostream &operator<<( std::ostream &out, const Bureaucrat &object )
+{
+	out << object.getName() << ", bureaucrat grade " << object.getGrade() << std::endl;
+	return out;
 }

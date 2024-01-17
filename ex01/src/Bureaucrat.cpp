@@ -52,6 +52,16 @@ bool		Bureaucrat::checkGrade( int grade )
 	return true ;
 }
 
+void		signForm( bool status, const Form &form )
+{
+	if (status)
+		std::cout << getName() << " signed " << form.getName() << std::endl;
+	else if (getGrade() < form.getSigningGrade())
+		std::cout << getName() << " couldn’t sign " << form.getName() << " because signing grade is higher"  << std::endl;
+	else if (getGrade() < form.getExecutionGrade())
+		std::cout << getName() << " couldn’t sign " << form.getName() << " because execution grade is higher"  << std::endl;
+}
+
 const char	GradeTooLowException::*what( void ) const throw()
 {
 	return ("Lowest grade already reached.");

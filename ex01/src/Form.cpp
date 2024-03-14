@@ -2,15 +2,15 @@
 
 Form::Form()
 {
-
+	//initializer list of variables
 }
 
 Form::Form( const std::string name, int grade ) : _name( name ), 
 {
-
+	//finish initializer list
 }
 
-Form::Form( const Form &object ) : _name(object.getName())
+Form::Form( const Form &object ) : _name(object.getName()), _gradeE(object.getExecutionGrade()), _gradeS(object.getSigningGrade())
 {
 	*this = object;
 }
@@ -19,10 +19,7 @@ Form::~Form() {}
 
 Form		&Form::operator=( const Form &object )
 {
-	setGrade(object.getGrade());
 	setStatus(object.getStatus());
-	setSigningGrade(object.getSigningGrade());
-	setExecutionGrade(object.getExecutionGrade());
 	return *this ;
 }
 
@@ -46,32 +43,17 @@ int			Form::getExecutionGrade( void ) const
 	return _gradeE ;
 }
 
-void		Form::setGrade( int i )
-{
-
-}
-
 void		Form::setStatus( bool status )
 {
-
-}
-
-void		Form::setSigningGrade( int grade )
-{
-
-}
-
-void		Form::setExecutionGrade( int grade )
-{
-
+	_isSigned = status;
 }
 
 bool		Form::beSigned( const Bureaucrat &b )
 {
-
+	//check if bureaucrat has grade to sign
 }
 
-std::ostream	operator<<( std::ostream &out, const Form &object )
+std::ostream	&operator<<( std::ostream &out, const Form &object )
 {
 	return (out << object.getName() << ", signing grade " << object.getSigningGrade() << ", execution grade " << std::endl);
 }

@@ -21,13 +21,10 @@ class Form
 		bool		getStatus( void ) const;
 		int			getSigningGrade( void ) const;
 		int			getExecutionGrade( void ) const;
-		void		setGrade( int i );
 		void		setStatus( bool status );
-		void		setSigningGrade( int grade );
-		void		setExecutionGrade( int grade );
 		bool		beSigned( const Bureaucrat &b );
 };
 
-std::ostream	operator<<( std::ostream &out, const Form &object );
+std::ostream	&operator<<( std::ostream &out, const Form &object );
 
 #endif

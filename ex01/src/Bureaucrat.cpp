@@ -52,24 +52,14 @@ bool		Bureaucrat::checkGrade( int grade )
 	return true ;
 }
 
-void		signForm( bool status, const Form &form )
+const char	*Bureaucrat::GradeTooLowException::what( void ) const throw()
 {
-	if (status)
-		std::cout << getName() << " signed " << form.getName() << std::endl;
-	else if (getGrade() < form.getSigningGrade())
-		std::cout << getName() << " couldn’t sign " << form.getName() << " because signing grade is higher"  << std::endl;
-	else if (getGrade() < form.getExecutionGrade())
-		std::cout << getName() << " couldn’t sign " << form.getName() << " because execution grade is higher"  << std::endl;
+	return "Lowest grade already reached.";
 }
 
-const char	GradeTooLowException::*what( void ) const throw()
+const char	*Bureaucrat::GradeTooHighException::what( void ) const throw()
 {
-	return ("Lowest grade already reached.");
-}
-
-const char	GradeTooHighException::*what( void ) const throw()
-{
-	return ("Highest grade already reached.");
+	return "Highest grade already reached.";
 }
 
 std::ostream &operator<<( std::ostream &out, const Bureaucrat &object )

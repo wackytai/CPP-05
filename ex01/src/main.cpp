@@ -5,14 +5,14 @@ int	bureaucracy(std::string name, int grade)
 	Bureaucrat brc(name, grade);
 
 	std::cout << brc << std::endl;
-	brc.upgrade();
-	brc.upgrade();
-	brc.upgrade();
+	brc.incrementGrade();
+	brc.incrementGrade();
+	brc.incrementGrade();
 	std::cout << brc << std::endl;
-	brc.downgrade();
-	brc.downgrade();
-	brc.downgrade();
-	brc.downgrade();
+	brc.decrementGrade();
+	brc.decrementGrade();
+	brc.decrementGrade();
+	brc.decrementGrade();
 	std::cout << brc << std::endl;
 	brc.setGrade(brc.getGrade() + 5);
 	std::cout << brc << std::endl;
@@ -29,12 +29,12 @@ int	test(std::string name, int grade)
 	}
 	catch ( Bureaucrat::GradeTooHighException &e )
 	{
-		std::cerr << e.what << std::endl;
+		std::cerr << e.what() << std::endl;
 		return 1;
 	}
 	catch ( Bureaucrat::GradeTooLowException &e )
 	{
-		std::cerr << e.what << std::endl;
+		std::cerr << e.what() << std::endl;
 		return 1;
 	}
 	return 0;

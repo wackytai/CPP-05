@@ -54,15 +54,15 @@ bool		Bureaucrat::checkGrade( int grade )
 
 const char	*Bureaucrat::GradeTooLowException::what( void ) const throw()
 {
-	return "Lowest grade already reached.";
+	return "Lowest grade reached.";
 }
 
 const char	*Bureaucrat::GradeTooHighException::what( void ) const throw()
 {
-	return "Highest grade already reached.";
+	return "Highest grade reached.";
 }
 
 std::ostream &operator<<( std::ostream &out, const Bureaucrat &object )
 {
-	return (out << object.getName() << ", bureaucrat grade " << object.getGrade() << std::endl);
+	return (out << object.getName() << ", bureaucrat grade " << object.getGrade());
 }

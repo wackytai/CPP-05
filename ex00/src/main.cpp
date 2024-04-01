@@ -14,9 +14,9 @@ int	bureaucracy(std::string name, int grade)
 	brc.decrementGrade();
 	brc.decrementGrade();
 	std::cout << brc << std::endl;
-	brc.setGrade(brc.getGrade() + 5);
+	brc.setGrade(brc.getGrade() + 2);
 	std::cout << brc << std::endl;
-	brc.setGrade(brc.getGrade() - 10);
+	brc.setGrade(brc.getGrade() - 40);
 	std::cout << brc << std::endl;
 	return 0;
 }
@@ -42,13 +42,20 @@ int	test(std::string name, int grade)
 
 int	main()
 {
-	test("Form stacker", 0);
-	test("Form stacker", 151);
-	test("Form stacker", 2);
-	test("Form stacker", 150);
-	test("Form stacker", 145);
-	test("Form stacker", 3);
-	test("Form stacker", 75);
+	test("Bureaucrat 01", 0);
+	std::cout << std::endl;
+	test("Bureaucrat 02", 151);
+	std::cout << std::endl;
+	test("Bureaucrat 03", 2);
+	std::cout << std::endl;
+	test("Bureaucrat 04", 150);
+	std::cout << std::endl;
+	test("Bureaucrat 05", 145);
+	std::cout << std::endl;
+	test("Bureaucrat 06", 3);
+	std::cout << std::endl;
+	test("Bureaucrat 07", 75);
+	std::cout << std::endl;
 
 	return 0;
 }

@@ -69,7 +69,10 @@ void		Bureaucrat::signForm( std::string name, int status ) const
 void		Bureaucrat::executeForm( AForm const &form ) const
 {
 	if (form.getStatus() && getGrade() <= form.getExecutionGrade())
+	{
+		form.action();
 		std::cout << getName() << " executed " << form.getName() << std::endl;
+	}
 	else
 		if (form.getStatus())
 			std::cout << getName() << "couldn't execute " << form.getName() << "because bureaucrat's grade is too low." << std::endl;
@@ -77,12 +80,12 @@ void		Bureaucrat::executeForm( AForm const &form ) const
 
 const char	*Bureaucrat::GradeTooLowException::what( void ) const throw()
 {
-	return "Lowest grade reached.";
+	return "Bureaucrat: Lowest grade reached.";
 }
 
 const char	*Bureaucrat::GradeTooHighException::what( void ) const throw()
 {
-	return "Highest grade reached.";
+	return "Bureaucrat: Highest grade reached.";
 }
 
 std::ostream &operator<<( std::ostream &out, const Bureaucrat &object )

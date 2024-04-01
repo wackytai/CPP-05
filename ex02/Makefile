@@ -1,4 +1,4 @@
-NAME = 
+NAME = executor
 SOURCES = $(wildcard ./src/*.cpp)
 CFLAGS = -Wall -Wextra -Wextra -g3 -std=c++98 -pedantic -fsanitize=address,undefined
 CC = @c++

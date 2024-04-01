@@ -2,18 +2,18 @@
 # define PRESIDENTIALPARDON_HPP
 # include "AForm.hpp"
 
-class PresidentialPardon : public AForm
+class PresidentialPardonForm : public AForm
 {
 	private:
 		std::string	_target;
 	
 	public:
-		PresidentialPardon();
-		PresidentialPardon( const std::string target );
-		PresidentialPardon( const PresidentialPardon &object );
-		virtual	~PresidentialPardon();
-		PresidentialPardon	&operator=( const PresidentialPardon &object );
-		void	execute( Bureaucrat const &executor ) const;
+		PresidentialPardonForm();
+		PresidentialPardonForm( const std::string target );
+		PresidentialPardonForm( const PresidentialPardonForm &object );
+		virtual	~PresidentialPardonForm();
+		PresidentialPardonForm	&operator=( const PresidentialPardonForm &object );
+		int					action( void ) const;
 };
 
 #endif

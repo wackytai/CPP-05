@@ -14,32 +14,27 @@ RobotomyRequestForm::RobotomyRequestForm( const std::string target ) : AForm("Ro
 
 RobotomyRequestForm::RobotomyRequestForm( const RobotomyRequestForm &object ) : AForm("RobotomyRequestForm", 72, 45)
 {
-	_target = object._target;
-	setStatus(false);
+	*this = object;
 }
 
 RobotomyRequestForm::~RobotomyRequestForm() {}
 
 RobotomyRequestForm& RobotomyRequestForm::operator=( const RobotomyRequestForm &object )
 {
-	if (_target != object._target)
-		_target = object._target;
-	setStatus(object.getStatus());
+	_target = object._target;
+	setStatus(false);
 	return *this;
 }
 
-void	RobotomyRequestForm::execute( Bureaucrat const &executor ) const
+int	RobotomyRequestForm::action( void ) const
 {
 	static int	i;
 
-	if (executor.getGrade() > getExecutionGrade())
-	{
-		std::cout << getName() << " execution failed: ";
-		throw AForm::GradeTooLowException();
-	}
 	std::cout << "* drilling noises *" << std::endl;
-	if (i % 2 == 0)
+	if (i % 2 != 0)
 		std::cout << _target << " has been robotomized successfully." << std::endl;
 	else
 		std::cout << _target << " has failed to be robotomized." << std::endl;
+	i++;
+	return 1;
 }

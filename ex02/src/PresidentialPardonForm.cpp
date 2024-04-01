@@ -1,34 +1,33 @@
 #include "../inc/PresidentialPardonForm.hpp"
 
-PresidentialPardon::PresidentialPardon() :AForm( "PresidentialPardon", 25, 5 )
+PresidentialPardonForm::PresidentialPardonForm() :AForm( "PresidentialPardonForm", 25, 5 )
 {
 	_target = "default";
 	setStatus( false );
 }
 
-PresidentialPardon::PresidentialPardon( const std::string target ) :AForm( "PresidentialPardon", 25, 5 )
+PresidentialPardonForm::PresidentialPardonForm( const std::string target ) :AForm( "PresidentialPardonForm", 25, 5 )
 {
-	_target = "default";
+	_target = target;
 	setStatus( false );
 }
 
-PresidentialPardon::PresidentialPardon( const PresidentialPardon &object ) :AForm( "PresidentialPardon", 25, 5 )
+PresidentialPardonForm::PresidentialPardonForm( const PresidentialPardonForm &object ) :AForm( "PresidentialPardonForm", 25, 5 )
 {
-	_target = object._target;
-	setStatus( false );
 	*this = object;
 }
 
-PresidentialPardon::~PresidentialPardon() {}
+PresidentialPardonForm::~PresidentialPardonForm() {}
 
-PresidentialPardon&	PresidentialPardon::operator=( const PresidentialPardon &object )
+PresidentialPardonForm&	PresidentialPardonForm::operator=( const PresidentialPardonForm &object )
 {
 	_target = object._target;
 	setStatus( false );
+	return *this;
 }
 
-void	PresidentialPardon::execute( Bureaucrat const &executor ) const
+int	PresidentialPardonForm::action( void ) const
 {
-	(void)executor;
 	std::cout << _target << " has been pardoned by Zaphod Beeblebrox" << std::endl;
+	return 1;
 }

@@ -13,7 +13,7 @@ class RobotomyRequestForm : public AForm
 		RobotomyRequestForm( const RobotomyRequestForm &object );
 		virtual 		~RobotomyRequestForm();
 		RobotomyRequestForm	&operator=( const RobotomyRequestForm &object );
-		void	execute( Bureaucrat const &executor ) const;
+		int					action( void ) const;
 };
 
 #endif

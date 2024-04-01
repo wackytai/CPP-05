@@ -46,20 +46,34 @@ void		Bureaucrat::decrementGrade ( void )
 bool		Bureaucrat::checkGrade( int grade )
 {
 	if (grade < 1)
-		throw GradeTooHighException();
+		throw Bureaucrat::GradeTooHighException();
 	else if (grade > 150)
-		throw GradeTooLowException();
+		throw Bureaucrat::GradeTooLowException();
 	return true ;
+}
+
+void		Bureaucrat::signForm( std::string name, int status )
+{
+	switch (status)
+	{
+		case 0:
+			std::cout << getName() << " signed and executed " << name << std::endl;
+			break;
+		default:
+			std::cout << getName() << "couldn't sign " << name << " because bureaucrat's grade is too low." << std::endl;
+			break;
+	}
+	return ;
 }
 
 const char	*Bureaucrat::GradeTooLowException::what( void ) const throw()
 {
-	return "Lowest grade already reached.";
+	return "Bureaucrat: Lowest grade reached.";
 }
 
 const char	*Bureaucrat::GradeTooHighException::what( void ) const throw()
 {
-	return "Highest grade already reached.";
+	return "Bureaucrat: Highest grade reached.";
 }
 
 std::ostream &operator<<( std::ostream &out, const Bureaucrat &object )

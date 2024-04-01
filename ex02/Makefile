@@ -9,6 +9,7 @@ $(NAME):	$(SOURCES)
 
 clean:
 		@rm -f $(wildcard ./src/*.o)
+		@rm -f ./*_shrubbery
 
 fclean:	clean
 		@rm -f $(NAME)

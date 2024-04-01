@@ -2,74 +2,50 @@
 #include "../inc/ShrubberyCreationForm.hpp"
 #include "../inc/RobotomyRequestForm.hpp"
 #include "../inc/PresidentialPardonForm.hpp"
+#include "../inc/Intern.hpp"
 
-int	company_life(std::string name, int grade)
+int	company_life(std::string name, int grade, std::string form, std::string target, AForm **new_form)
 {
-	Bureaucrat				desk_jockey(name, grade);
-	ShrubberyCreationForm	ideiafix("CEO's nana's street");
-	RobotomyRequestForm		express_mandatory_surgery("Head of HR");
-	PresidentialPardonForm	get_out_of_jail_free("Investment manager");
+	Bureaucrat	desk_jockey(name, grade);
+	Intern		fng;
 
-	ideiafix.beSigned(desk_jockey);
-	express_mandatory_surgery.beSigned(desk_jockey);
-	get_out_of_jail_free.beSigned(desk_jockey);
-	std::cout << std::endl;
-	ideiafix.execute(desk_jockey);
-	std::cout << std::endl;
-	express_mandatory_surgery.execute(desk_jockey);
-	express_mandatory_surgery.execute(desk_jockey);
-	express_mandatory_surgery.execute(desk_jockey);
-	std::cout << std::endl;
-	get_out_of_jail_free.execute(desk_jockey);
+	*new_form = fng.makeForm(form, target);
+	(*new_form)->beSigned(desk_jockey);
+	(*new_form)->execute(desk_jockey);
 	return (0);
 }
 
-int	error_testing(std::string name, int grade)
+int	error_testing(std::string name, int grade, std::string form, std::string target)
 {
+	AForm		*new_form = NULL;
 	try
 	{
-		company_life(name, grade);
+		company_life(name, grade, form, target, &new_form);
 	}
-	catch(AForm::GradeTooHighException &error)
+	catch(Intern::InvalidFormNameException &error)
 	{
 		std::cerr << error.what() << std::endl;
-		return (1);
 	}
-	catch(AForm::GradeTooLowException &error)
+	catch (...)
 	{
-		std::cerr << error.what() << std::endl;
-		return (1);
+		std::cerr << "Exception caught" << std::endl;
 	}
-	catch(AForm::FormSignedException &error)
-	{
-		std::cerr << error.what() << std::endl;
-		return (1);
-	}
-	catch(AForm::FormNotExecutedException &error)
-	{
-		std::cerr << error.what() << std::endl;
-		return (1);
-	}
-	catch(Bureaucrat::GradeTooHighException &error)
-	{
-		std::cerr << error.what() << std::endl;
-		return (1);
-	}
-	catch(Bureaucrat::GradeTooLowException &error)
-	{
-		std::cerr << error.what() << std::endl;
-		return (1);
-	}
+	if (new_form != NULL)
+		delete new_form;
 	return (0);
 }
 
 int	main(void)
 {
-	error_testing("Bureaucrat 01", 74);
+	error_testing("Bureaucrat 01", 74, "random", "the moon");
 	std::cout << std::endl;
-	error_testing("Bureaucrat 02", 10);
+	error_testing("Bureaucrat 02", 10, "shrubbery creation", "parking lot");
 	std::cout << std::endl;
-	error_testing("Bureaucrat 03", 1);
+	error_testing("Bureaucrat 03", 1, "ROBOTOMY REQUEST", "fng");
+	std::cout << std::endl;
+	error_testing("Bureaucrat 04", 1, "PrEsIdEnTiAl PaRdOn", "CEO");
+	std::cout << std::endl;
+	error_testing("Bureaucrat 05", 1, "robotomy creation", "everyone");
 	std::cout << std::endl;
 	return (0);
 }

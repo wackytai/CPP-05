@@ -12,9 +12,10 @@ Intern::~Intern() {}
 Intern& Intern::operator=( const Intern &object )
 {
 	(void)object;
+	return *this;
 }
 
-AForm*	Intern::makeForm( const std::string formName, const std::string target )
+AForm*	Intern::makeForm( const std::string name, const std::string target )
 {
 	AForm	*form;
 
@@ -22,7 +23,7 @@ AForm*	Intern::makeForm( const std::string formName, const std::string target )
 	AForm		*(Intern::*ptr[3])(std::string target) = {&Intern::makePresidentialPardonForm, &Intern::makeRobotomyRequestForm, &Intern::makeShrubberyCreationForm};
 	for (int i = 0; i < 3; i++)
 	{
-		if (formName == formNames[i])
+		if (name == formNames[i])
 		{
 			return (form = (this->*ptr[i])(target));
 		}
@@ -48,5 +49,5 @@ AForm*	Intern::makeShrubberyCreationForm( const std::string target )
 
 const char* Intern::InvalidFormNameException::what() const throw()
 {
-	return "Invalid form name";
+	return "Invalid form name. Try 'presidential pardon', 'robotomy request' or 'shrubbery creation'";
 }

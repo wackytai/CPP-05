@@ -46,9 +46,9 @@ void		Bureaucrat::decrementGrade ( void )
 bool		Bureaucrat::checkGrade( int grade )
 {
 	if (grade < 1)
-		throw Bureaucrat::GradeTooHighException();
+		throw GradeTooHighException();
 	else if (grade > 150)
-		throw Bureaucrat::GradeTooLowException();
+		throw GradeTooLowException();
 	return true ;
 }
 
@@ -57,7 +57,7 @@ void		Bureaucrat::signForm( std::string name, int status )
 	switch (status)
 	{
 		case 0:
-			std::cout << getName() << " signed and executed " << name << std::endl;
+			std::cout << getName() << " signed " << name << std::endl;
 			break;
 		default:
 			std::cout << getName() << "couldn't sign " << name << " because bureaucrat's grade is too low." << std::endl;

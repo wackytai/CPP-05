@@ -6,7 +6,7 @@ Form::Form( const std::string name, int gradeS, int gradeE ) : _name( name ), _g
 {
 	if (_gradeS < 1 || _gradeE < 1)
 		throw GradeTooHighException();
-	else if (_gradeS > 150 || _gradeE > 150)
+	if (_gradeS > 150 || _gradeE > 150)
 		throw GradeTooLowException();
 }
 
@@ -47,7 +47,9 @@ void		Form::setStatus( bool status )
 
 void	Form::beSigned( Bureaucrat &b )
 {
-	if (b.getGrade() <= _gradeS)
+	if (getStatus())
+		throw FormSignedException();
+	else if (b.getGrade() <= _gradeS)
 	{
 		setStatus(true);
 		b.signForm(getName(), 0);
@@ -55,7 +57,7 @@ void	Form::beSigned( Bureaucrat &b )
 	else
 	{
 		b.signForm(getName(), 1);
-		throw Form::GradeTooLowException();
+		throw GradeTooLowException();
 	}
 }
 
@@ -72,4 +74,9 @@ const char	*Form::GradeTooLowException::what() const throw()
 const char	*Form::GradeTooHighException::what() const throw()
 {
 	return "Form: Grade is too high";
+}
+
+const char	*Form::FormSignedException::what() const throw()
+{
+	return "Form: Form is already signed";
 }

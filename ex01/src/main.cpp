@@ -30,6 +30,11 @@ int	error_testing(std::string name, int grade, std::string name2, int grade2, in
 		std::cerr << error.what() << std::endl;
 		return (1);
 	}
+	catch(Form::FormSignedException &error)
+	{
+		std::cerr << error.what() << std::endl;
+		return (1);
+	}
 	catch(Bureaucrat::GradeTooHighException &error)
 	{
 		std::cerr << error.what() << std::endl;
@@ -49,9 +54,9 @@ int	main(void)
 	std::cout << std::endl;
 	error_testing("Bureaucrat 02", 74, "form1", 151, 75);
 	std::cout << std::endl;
-	error_testing("Bureaucrat 03", 74, "form1", 75, 0);
+	error_testing("Bureaucrat 03", 0, "form1", 75, 1);
 	std::cout << std::endl;
-	error_testing("Bureaucrat 04", 74, "form1", 75, 151);
+	error_testing("Bureaucrat 04", 151, "form1", 0, 150);
 	std::cout << std::endl;
 	error_testing("Bureaucrat 05", 74, "form1", 75, 75);
 	std::cout << std::endl;
